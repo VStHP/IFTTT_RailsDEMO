@@ -20,7 +20,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.created_at_desc.paginate(page: params[:page], per_page: 15)
   end
 
   private

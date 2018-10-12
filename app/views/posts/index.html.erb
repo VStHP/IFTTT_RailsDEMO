@@ -1,13 +1,12 @@
-<div><%= link_to 'new', new_post_path %></div>
+<div><%= link_to 'new', new_post_path, class: 'btn btn-default btn-primary' %></div>
 <div>
-  <table>
+  <table class="table table-bordered table-hover">
     <thead>
       <tr>
         <th>ID</th>
         <th>Title</th>
         <th>Body</th>
         <th>Created at</th>
-        <th>Updated at</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -15,4 +14,5 @@
       <%= render @posts %>
     </tbody>
   </table>
+  <%= will_paginate %>
 </div>

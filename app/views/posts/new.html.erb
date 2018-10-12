@@ -1,12 +1,12 @@
-<%= form_for @post do |f| %>
-  <div>
+<%= form_for @post, html: { class: 'form-vertical' } do |f| %>
+  <div class="form-group">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: 'form-control' %>
   </div>
-  <div>
+  <div class="form-group">
     <%= f.label :body %>
-    <%= f.text_field :body %>
+    <%= f.text_field :body, class: 'form-control' %>
   </div>
-  <div><%= f.submit 'submit' %></div>
+  <div><%= f.submit 'Submit', class: 'btn btn-success' %></div>
 <% end %>
 

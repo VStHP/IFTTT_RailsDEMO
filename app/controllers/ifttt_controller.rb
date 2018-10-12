@@ -16,7 +16,9 @@ class IftttController < ApplicationController
           new_post_with_title: { title: 'Blog no1' }
         },
         actions: {
-          create_new_post: { body: 'How are you today?' }
+          create_new_post:
+          { title: 'Hello',
+            body: 'How are you today?' }
         }
       }
     }
@@ -39,7 +41,7 @@ class IftttController < ApplicationController
   private
 
   def post_params
-    params.require(:actionFields).permit(:body)
+    params.require(:actionFields).permit(:title, :body)
   end
 
   def return_errors_unless_valid_service_key

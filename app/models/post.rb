@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   scope :_title, ->(title) { where(title: title) }
-
+  scope :created_at_desc, -> { order(created_at: :desc) }
   def to_json
     {
       title: title,
