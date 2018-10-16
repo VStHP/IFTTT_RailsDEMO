@@ -1,0 +1,7 @@
+<% if @danger_message %>
+  $('#content-body').prepend('<div class="alert alert-danger"><%= @danger_message %></div>');
+<% else %>
+  $('#content-body').prepend('<div class="alert alert-success"><%= @success_message %></div>');
+  $('#post-<%= @post.id %>').remove();
+<% end %>
+setTimeout(function(){ $('.alert').remove(); }, 2000);

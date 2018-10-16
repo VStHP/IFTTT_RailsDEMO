@@ -1,7 +1,10 @@
-<tr>
-  <td><%= post.id %></td>
-  <td><%= post.title %></td>
-  <td><%= post.body %></td>
-  <td><%= post.created_at %></td>
-  <td><%= link_to 'Show', post %></td>
-</tr>
+<li id="post-<%= post.id %>">
+  <img src="https://scontent.fdad1-1.fna.fbcdn.net/v/t1.0-1/p200x200/27750940_1637531126327293_5439196059262835214_n.jpg?_nc_cat=100&oh=0231656e2501b74555843e9eb2a83b9b&oe=5C4C45EC" class="gravatar">
+  <span class="user"><%= link_to post.hashtag, '#' %></span>
+  <span class="content"><%= post.content %></span>
+  <span class="timestamp">
+    <i></i>
+    Posted <%= time_ago_in_words(post.created_at) %> ago.
+  </span>
+  <span class="del-post"><%= link_to 'Delete', post, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></span>
+</li>

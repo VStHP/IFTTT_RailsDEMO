@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
 ruby '2.5.1'
 
-gem "will_paginate", "3.1.5"
-gem "bootstrap-will_paginate", "1.0.0"
-gem "bootstrap-sass", "3.2.0.2"
+gem 'faker'
+gem 'will_paginate', '3.1.5'
+gem 'bootstrap-will_paginate', '1.0.0'
+gem 'bootstrap-sass', '3.2.0.2'
 gem 'dotenv-rails'
 gem 'jquery-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

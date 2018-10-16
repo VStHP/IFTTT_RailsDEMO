@@ -3,7 +3,7 @@ class IftttController < ApplicationController
 
   before_action :return_errors_unless_valid_service_key
   before_action :return_errors_unless_valid_action_fields, only: :create_new_post
-  before_action :return_errors_if_missing_trigger_title_field, only: :new_post_with_title
+  before_action :return_errors_if_missing_trigger_title_field, only: :new_post_with_hashtag
 
   def status
     head :ok
@@ -13,12 +13,14 @@ class IftttController < ApplicationController
     data = {
       samples: {
         triggers: {
-          new_post_with_title: { title: 'Blog no1' }
+          new_post_with_hashtag: { hashtag: 'ifttt' }
         },
         actions: {
-          create_new_post:
-          { title: 'Hello',
-            body: 'How are you today?' }
+          create_new_post: {
+            hashtag: 'ifttt',
+            content: 'How are you today?',
+            test: true
+          }
         }
       }
     }
@@ -27,12 +29,14 @@ class IftttController < ApplicationController
   end
 
   def create_new_post
-    post = [Post.create(post_params).to_limited_json]
-    render plain: { data: post }.to_json
+    post = Post.new(post_params)
+    post.save if params.dig(:actionFields, :test).nil?
+    data = [post.to_limited_json]
+    render plain: { data: data }.to_json
   end
 
-  def new_post_with_title
-    data = Post._title(params.dig(:triggerFields, :title))
+  def new_post_with_hashtag
+    data = Post._hashtag(params.dig(:triggerFields, :hashtag))
                .order(created_at: :desc).map(&:to_json)
                .first(params[:limit] || 50)
     render plain: { data: data }.to_json
@@ -41,7 +45,7 @@ class IftttController < ApplicationController
   private
 
   def post_params
-    params.require(:actionFields).permit(:title, :body)
+    params.require(:actionFields).permit(:content, :hashtag)
   end
 
   def return_errors_unless_valid_service_key
@@ -51,13 +55,13 @@ class IftttController < ApplicationController
   end
 
   def return_errors_unless_valid_action_fields
-    if params.dig(:actionFields, :body).blank?
+    if params.dig(:actionFields, :hashtag).blank? || params.dig(:actionFields, :content).blank?
       return render plain: { errors: [{ status: 'SKIP', message: '400' }] }.to_json, status: 400
     end
   end
 
   def return_errors_if_missing_trigger_title_field
-    if params.dig(:triggerFields, :title).blank?
+    if params.dig(:triggerFields, :hashtag).blank?
       return render plain: { errors: [{ status: 'SKIP', message: '400' }] }.to_json, status: 400
     end
   end

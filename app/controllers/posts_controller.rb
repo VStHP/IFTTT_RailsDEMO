@@ -1,32 +1,35 @@
 class PostsController < ApplicationController
-  def new
-    @post = Post.new
-  end
-
   def create
     @post = Post.new(post_params)
-    @post.link_to_post = post_url([@post, @post.id])
     if @post.save
-      redirect_to root_path
-    else
-      render :new
+      @success_message = 'Your post has been posted successfully!'
     end
   end
 
-  def show
-    @post = Post.find_by(id: params[:id])
-    return if @post
-    redirect_to root_path
+  def index
+    @post = Post.new
+    @posts = Post.created_at_desc.paginate(page: params[:page], per_page: 15)
   end
 
-  def index
-    @posts = Post.created_at_desc.paginate(page: params[:page], per_page: 15)
+  def destroy
+    load_post
+    return if @danger_message
+    if @post.delete
+      @success_message = 'Deleted post successfully'
+    else
+      @danger_message = 'Deleted post failed'
+    end
   end
 
   private
 
+  def load_post
+    @post = Post.find_by(id: params[:id])
+    @danger_message = 'Not found this post' if @post.nil?
+  end
+
   def post_params
     params.require(:post)
-          .permit(:title, :body)
+          .permit(:content, :hashtag)
   end
 end

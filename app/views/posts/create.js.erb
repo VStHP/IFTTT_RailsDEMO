@@ -1,0 +1,9 @@
+<% if @success_message %>
+  $('#content-body').prepend('<div class="alert alert-success"><%= @success_message %></div>');
+  $('.posts').prepend('<%= j render @post %>');
+  $('#new_post').closest('form').find("input[type=text], textarea").val("");
+  setTimeout(function(){ $('.alert').remove(); }, 2000);
+<% else %>
+  $('.micropost_form').replaceWith('<%= j render "form" %>');
+<% end %>
+

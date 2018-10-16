@@ -156,6 +156,7 @@ aside {
 .gravatar {
   float: left;
   margin-right: 10px;
+  border: 1px solid #000;
 }
 
 .gravatar_edit {
@@ -216,9 +217,9 @@ input {
   }
 }
 
-/* microposts */
+/* posts */
 
-.microposts {
+.posts {
   list-style: none;
   padding: 0;
   li {
@@ -246,6 +247,57 @@ input {
     float: left;
     margin-right: 10px;
     margin-top: 5px;
+    width: 50px;
+  }
+}
+
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+}
+
+span.picture {
+  margin-top: 10px;
+  input {
+    border: 0;
+  }
+}
+.posts {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+    position: relative;
+  }
+  .user {
+    margin-top: 5em;
+    padding-top: 0;
+  }
+  .content {
+    display: block;
+    margin-left: 60px;
+    img {
+      display: block;
+      padding: 5px 0;
+    }
+  }
+  .timestamp {
+    color: $gray-light;
+    display: block;
+    margin-left: 60px;
+  }
+  .gravatar {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+  }
+  .del-post {
+    position: absolute;
+    top: 0px;
+    right: 0px;
   }
 }
 

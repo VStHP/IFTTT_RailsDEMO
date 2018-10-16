@@ -1,18 +1,20 @@
-<div><%= link_to 'new', new_post_path, class: 'btn btn-default btn-primary' %></div>
-<div>
-  <table class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Body</th>
-        <th>Created at</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <img src="https://scontent.fdad1-1.fna.fbcdn.net/v/t1.0-1/p200x200/27750940_1637531126327293_5439196059262835214_n.jpg?_nc_cat=100&oh=0231656e2501b74555843e9eb2a83b9b&oe=5C4C45EC" class="gravatar">
+        TamDN
+      </h1>
+    </section>
+    <section class="micropost_form">
+      <%= render 'form' %>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <h3>My Posts</h3>
+    <ol class="posts">
       <%= render @posts %>
-    </tbody>
-  </table>
-  <%= will_paginate %>
+    </ol>
+    <%= will_paginate @posts %>
+  </div>
 </div>
